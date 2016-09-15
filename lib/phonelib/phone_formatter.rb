@@ -4,11 +4,11 @@ module Phonelib
     # Returns formatted national number
     # @param formatted [Boolean] whether to return numbers only or formatted
     # @return [String] formatted national number
-    def national(formatted = true)
+    def national(formatted = true, prefix: true)
       return @national_number unless valid?
       format_match, format_string = formatting_data
 
-      if format_match
+      if format_match && prefix
         out = format_string.gsub(/\$\d/) { |el| format_match[el[1].to_i] }
         formatted ? out : out.gsub(/[^0-9]/, '')
       else
